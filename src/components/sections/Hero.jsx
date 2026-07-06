@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import Button from "../ui/Button";
 import personal from "../../data/personal";
@@ -6,82 +7,75 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="min-h-screen bg-[#050816] text-white flex items-center"
+      className="min-h-screen bg-[#050816] text-white flex items-center relative overflow-hidden"
     >
+      {/* Background Glow */}
+      <div className="absolute top-20 left-20 w-72 h-72 bg-cyan-500/20 rounded-full blur-[120px]"></div>
+      <div className="absolute bottom-20 right-20 w-72 h-72 bg-purple-600/20 rounded-full blur-[120px]"></div>
+
       <div className="max-w-7xl mx-auto px-8 w-full">
-
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-
-          {/* LEFT */}
-
-          <div>
-
-            <p className="text-cyan-400 text-lg mb-4">
-              Hello 👋 I'm
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* LEFT CONTENT */}
+          <motion.div
+            initial={{ opacity: 0, x: -60 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <p className="text-cyan-400 text-lg font-medium mb-4">
+              👋 Hello, I'm
             </p>
 
-            <h1 className="text-6xl font-bold mb-6">
+            <h1 className="text-5xl md:text-7xl font-extrabold mb-6 gradient-text">
               {personal.name}
             </h1>
 
             <TypeAnimation
               sequence={[
-                "AI Engineer",
-                2000,
-                "Python Developer",
-                2000,
-                "Machine Learning Engineer",
-                2000,
-                "Full Stack Developer",
-                2000,
+                ...personal.roles.flatMap((role) => [role, 2000]),
               ]}
               wrapper="span"
               speed={50}
               repeat={Infinity}
-              className="text-3xl text-cyan-400 font-semibold"
+              className="text-2xl md:text-4xl font-bold text-cyan-400"
             />
 
-            <p className="text-gray-400 mt-8 leading-8 max-w-xl">
-
-              Passionate about Artificial Intelligence,
-              Machine Learning and Full Stack Development.
-
-              I enjoy building real-world applications
-              that solve meaningful problems.
-
+            <p className="mt-8 text-gray-400 leading-8 text-lg max-w-xl">
+              {personal.about}
             </p>
 
-            <div className="flex gap-5 mt-10">
-
+            <div className="flex flex-wrap gap-5 mt-10">
               <Button href={personal.resume}>
-                Download Resume
+                📄 Download Resume
               </Button>
 
               <Button
                 href={personal.github}
                 variant="outline"
               >
-                GitHub
+                💻 GitHub
               </Button>
-
             </div>
+          </motion.div>
 
-          </div>
+          {/* RIGHT CONTENT */}
+          <motion.div
+            className="flex justify-center"
+            initial={{ opacity: 0, x: 60 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <div className="relative">
+              {/* Glow Ring */}
+              <div className="absolute inset-0 rounded-full bg-cyan-500 blur-3xl opacity-30 animate-pulse"></div>
 
-          {/* RIGHT */}
-
-          <div className="flex justify-center">
-
-            <img
-              src={personal.profileImage}
-              alt="profile"
-              className="w-96 rounded-full border-4 border-cyan-400 shadow-[0_0_60px_rgba(34,211,238,0.4)]"
-            />
-
-          </div>
-
+              <img
+                src={personal.profileImage}
+                alt={personal.name}
+                className="relative w-72 md:w-96 rounded-full border-4 border-cyan-400 glow transition duration-500 hover:scale-105"
+              />
+            </div>
+          </motion.div>
         </div>
-
       </div>
     </section>
   );

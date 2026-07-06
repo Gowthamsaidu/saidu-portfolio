@@ -1,0 +1,18 @@
+/* Gradient Text */
+.gradient-text {
+  background: linear-gradient(90deg, #22d3ee, #3b82f6, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Glass Card */
+.glass {
+  background: rgba(255,255,255,.05);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,.08);
+}
+
+/* Glow */
+.glow {
+  box-shadow: 0 0 40px rgba(34,211,238,.35);
+}
