@@ -1,38 +1,58 @@
 const skills = [
   {
     title: "💻 Languages",
-    items: ["Python", "Java", "SQL"]
+    items: [
+      "🐍 Python",
+      "☕ Java",
+      "🗄️ SQL",
+    ],
   },
+
   {
     title: "🌐 Frontend",
-    items: ["HTML", "CSS", "JavaScript", "React"]
+    items: [
+      "🌐 HTML",
+      "🎨 CSS",
+      "⚡ JavaScript",
+      "⚛ React",
+    ],
   },
+
   {
-    title: "⚙ Backend",
-    items: ["Node.js", "Express.js"]
+    title: "⚙️ Backend",
+    items: [
+      "🟢 Node.js",
+      "🚀 Express.js",
+    ],
   },
+
   {
-    title: "🗄 Database",
-    items: ["MongoDB", "MySQL"]
+    title: "🗄️ Database",
+    items: [
+      "🍃 MongoDB",
+      "🐬 MySQL",
+    ],
   },
+
   {
     title: "🤖 AI / ML",
     items: [
-      "Machine Learning",
-      "Deep Learning",
-      "TensorFlow",
-      "Scikit-Learn"
-    ]
+      "🧠 Machine Learning",
+      "🤖 Deep Learning",
+      "🔶 TensorFlow",
+      "📊 Scikit-Learn",
+    ],
   },
+
   {
-    title: "🛠 Tools",
+    title: "🛠️ Tools",
     items: [
-      "Git",
-      "GitHub",
-      "VS Code",
-      "Postman"
-    ]
-  }
+      "🔀 Git",
+      "🐙 GitHub",
+      "💻 VS Code",
+      "📮 Postman",
+    ],
+  },
 ];
 
 export default skills;

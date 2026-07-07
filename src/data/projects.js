@@ -17,18 +17,18 @@ const projects = [
     ],
 
     tech: [
-      "Python",
-      "Flask",
-      "Machine Learning",
-      "NLP",
-      "HTML",
-      "CSS",
-      "JavaScript",
-    ],
+  "🐍 Python",
+  "🔥 Flask",
+  "🧠 Machine Learning",
+  "📊 NLP",
+  "🌐 HTML",
+  "🎨 CSS",
+  "⚡ JavaScript",
+],
 
     github: "https://github.com/Gowthamsaidu",
 
-    demo: "#",
+    demo: "",
   },
 
   {
@@ -50,17 +50,17 @@ const projects = [
     ],
 
     tech: [
-      "React",
-      "Node.js",
-      "Express.js",
-      "MongoDB",
-      "JWT",
-      "Tailwind",
-    ],
+  "⚛ React",
+  "🟢 Node.js",
+  "🚀 Express.js",
+  "🍃 MongoDB",
+  "🔐 JWT",
+  "🎨 Tailwind CSS",
+],
 
     github: "https://github.com/Gowthamsaidu",
 
-    demo: "#",
+    demo: "",
   },
 ];
 
