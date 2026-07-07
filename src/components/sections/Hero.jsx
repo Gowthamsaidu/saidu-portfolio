@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import Button from "../ui/Button";
 import personal from "../../data/personal";
+import Stats from "../common/Stats";
 
 export default function Hero() {
   return (
@@ -78,6 +79,7 @@ export default function Hero() {
               </motion.div>
 
             </div>
+            <Stats />
           </motion.div>
 
           {/* RIGHT CONTENT */}

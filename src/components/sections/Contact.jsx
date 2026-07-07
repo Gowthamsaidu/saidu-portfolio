@@ -1,3 +1,5 @@
+import { useState } from "react";
+import emailjs from "@emailjs/browser";
 import { motion } from "framer-motion";
 import {
   FaEnvelope,
@@ -8,6 +10,75 @@ import {
 } from "react-icons/fa";
 
 export default function Contact() {
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState("");
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const sendEmail = async (e) => {
+    e.preventDefault();
+
+    if (
+      !formData.name ||
+      !formData.email ||
+      !formData.subject ||
+      !formData.message
+    ) {
+      setStatus("Please fill all fields.");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      setStatus("");
+
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        {
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        },
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      );
+
+      setStatus("✅ Message sent successfully!");
+
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
+
+    } catch (error) {
+  console.log("========== EMAILJS ERROR ==========");
+  console.log("Full Error:", error);
+  console.log("Status:", error.status);
+  console.log("Text:", error.text);
+  console.log("==================================");
+
+  setStatus("❌ Failed to send message.");
+} finally {
+  setLoading(false);
+}
+  };
+
   return (
     <section
       id="contact"
@@ -110,41 +181,68 @@ export default function Contact() {
           {/* Right */}
 
           <motion.form
-            initial={{ opacity:0,x:60 }}
-            whileInView={{ opacity:1,x:0 }}
-            viewport={{ once:true }}
-            transition={{ duration:.6 }}
+            onSubmit={sendEmail}
+            initial={{ opacity: 0, x: 60 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
             className="glass rounded-3xl p-10 border border-cyan-500/20"
           >
 
             <input
               type="text"
+              name="name"
               placeholder="Your Name"
-              className="w-full p-4 rounded-xl bg-[#1b2234] mb-6 outline-none"
+              value={formData.name}
+              onChange={handleChange}
+              className="w-full p-4 rounded-xl bg-[#1b2234] mb-6 outline-none focus:border focus:border-cyan-400"
             />
 
             <input
               type="email"
+              name="email"
               placeholder="Your Email"
-              className="w-full p-4 rounded-xl bg-[#1b2234] mb-6 outline-none"
+              value={formData.email}
+              onChange={handleChange}
+              className="w-full p-4 rounded-xl bg-[#1b2234] mb-6 outline-none focus:border focus:border-cyan-400"
             />
 
             <input
               type="text"
+              name="subject"
               placeholder="Subject"
-              className="w-full p-4 rounded-xl bg-[#1b2234] mb-6 outline-none"
+              value={formData.subject}
+              onChange={handleChange}
+              className="w-full p-4 rounded-xl bg-[#1b2234] mb-6 outline-none focus:border focus:border-cyan-400"
             />
 
             <textarea
               rows="6"
+              name="message"
               placeholder="Your Message"
-              className="w-full p-4 rounded-xl bg-[#1b2234] mb-6 outline-none"
+              value={formData.message}
+              onChange={handleChange}
+              className="w-full p-4 rounded-xl bg-[#1b2234] mb-6 outline-none resize-none focus:border focus:border-cyan-400"
             />
 
+            {status && (
+              <div
+                className={`mb-5 rounded-lg p-3 text-center font-medium ${
+                  status.includes("successfully")
+                    ? "bg-green-500/20 text-green-400 border border-green-500/40"
+                    : "bg-red-500/20 text-red-400 border border-red-500/40"
+                }`}
+              >
+                {status}
+              </div>
+            )}
+
             <button
-              className="bg-cyan-500 hover:bg-cyan-400 transition px-10 py-4 rounded-xl font-bold text-black w-full"
+              type="submit"
+              disabled={loading}
+              className="bg-cyan-500 hover:bg-cyan-400 disabled:bg-cyan-700 transition-all duration-300 px-10 py-4 rounded-xl font-bold text-black w-full hover:scale-[1.02]"
             >
-              Send Message
+              {loading ? "Sending..." : "Send Message"}
             </button>
 
           </motion.form>
@@ -152,6 +250,7 @@ export default function Contact() {
         </div>
 
       </div>
+
     </section>
   );
 }
