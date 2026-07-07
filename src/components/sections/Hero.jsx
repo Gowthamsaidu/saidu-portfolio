@@ -15,6 +15,7 @@ export default function Hero() {
 
       <div className="max-w-7xl mx-auto px-8 w-full">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
+
           {/* LEFT CONTENT */}
           <motion.div
             initial={{ opacity: 0, x: -60 }}
@@ -25,9 +26,14 @@ export default function Hero() {
               👋 Hello, I'm
             </p>
 
-            <h1 className="text-5xl md:text-7xl font-extrabold mb-6 gradient-text">
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
+              className="text-5xl md:text-7xl font-extrabold mb-6 gradient-text"
+            >
               {personal.name}
-            </h1>
+            </motion.h1>
 
             <TypeAnimation
               sequence={[
@@ -39,21 +45,38 @@ export default function Hero() {
               className="text-2xl md:text-4xl font-bold text-cyan-400"
             />
 
-            <p className="mt-8 text-gray-400 leading-8 text-lg max-w-xl">
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.7 }}
+              className="mt-8 text-gray-400 leading-8 text-lg max-w-xl"
+            >
               {personal.about}
-            </p>
+            </motion.p>
 
             <div className="flex flex-wrap gap-5 mt-10">
-              <Button href={personal.resume}>
-                📄 Download Resume
-              </Button>
 
-              <Button
-                href={personal.github}
-                variant="outline"
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                💻 GitHub
-              </Button>
+                <Button href={personal.resume}>
+                  📄 Download Resume
+                </Button>
+              </motion.div>
+
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button
+                  href={personal.github}
+                  variant="outline"
+                >
+                  💻 GitHub
+                </Button>
+              </motion.div>
+
             </div>
           </motion.div>
 
@@ -64,17 +87,38 @@ export default function Hero() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <div className="relative">
+
+            <motion.div
+              className="relative"
+              animate={{
+                y: [0, -12, 0],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            >
               {/* Glow Ring */}
               <div className="absolute inset-0 rounded-full bg-cyan-500 blur-3xl opacity-30 animate-pulse"></div>
 
-              <img
+              <motion.img
                 src={personal.profileImage}
                 alt={personal.name}
-                className="relative w-72 md:w-96 rounded-full border-4 border-cyan-400 glow transition duration-500 hover:scale-105"
+                whileHover={{
+                  scale: 1.06,
+                  rotate: 2,
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 250,
+                }}
+                className="relative w-72 md:w-96 rounded-full border-4 border-cyan-400 glow cursor-pointer"
               />
-            </div>
+            </motion.div>
+
           </motion.div>
+
         </div>
       </div>
     </section>

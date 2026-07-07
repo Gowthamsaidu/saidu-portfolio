@@ -16,3 +16,21 @@
 .glow {
   box-shadow: 0 0 40px rgba(34,211,238,.35);
 }
+
+@keyframes floatGlow {
+  0% {
+    transform: translateY(0px) scale(1);
+  }
+
+  50% {
+    transform: translateY(-25px) scale(1.05);
+  }
+
+  100% {
+    transform: translateY(0px) scale(1);
+  }
+}
+
+.animate-float {
+  animation: floatGlow 10s ease-in-out infinite;
+}
